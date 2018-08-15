@@ -31,7 +31,7 @@ const mergePromise = ajaxArray => {
 			 data.push(res);
 			 return data;
 		});	
-	})
+	});
  
 	return seq;
     
