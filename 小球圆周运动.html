@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS动画之转动的小球</title>
+    <style type="text/css"> 
+        .box{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            position: relative;
+            left: 300px;
+            top: 100px;
+            border-radius:50% ;
+        }
+        .box span{
+            width: 30px;
+            height: 30px;
+            background: blue;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -15px;
+            margin-top: -15px;
+            border-radius:50% ;
+        }
+    </style> 
+
+</head>
+<body>
+        <div class="box" id="box">
+            <span id="target"></span>
+        </div>
+
+        <script>
+            window.onload=function(){
+                var oBox=document.getElementById('box');
+                var oSpan=document.getElementById('target');
+                var r=oBox.offsetWidth/2-1; //求圆的半径；
+                var n=0; //将n当做角度，作为运动系数；
+                var timer=null;
+                timer=setInterval(function(){
+                    n++;
+                    oSpan.style.left = r + r*Math.sin(n*Math.PI/180) + 'px';
+                    oSpan.style.top = r - r*Math.cos(n*Math.PI/180) + 'px';
+                    if(n == 360){
+                        clearInterval(timer);
+                    }
+                },30)
+            }
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+setImmediate(() => {
+    console.log('setImmediate');
+});
+
+setTimeout(() => {
+    console.log('timeout');
+},0);
+
+process.nextTick(() => {
+    console.log('nextTick');
+    process.nextTick(() => {
+        console.log('nextTick2');
+    })
+})
+//执行顺序：
+//nextTick
+//nextTick2
+//timeout
+//setImmediate

@@ -25,6 +25,7 @@ console.log(addCurry(1, 2)); // 3
 /*阶段2，改进版*/
 
 var curry1 = function(func, args){
+    
     var length = func.length;
     var args = args || [];
     return function(){
