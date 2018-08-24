@@ -62,3 +62,25 @@ function add1(){
 console.log(add1(1)(2,3));// { [Function: fn] toString: [Function] }
 console.log(add1(1)(2,3).toString());// 6
 console.log(add1(1)(2)(3)(4)(5).toString());// 15
+
+
+//countMoney(1)(2)(3)(4)() -> 10
+
+var countMoney = (()=> {
+    let money = 0;
+    let args = [];
+    const res = function(){
+        if(arguments.length === 0){
+            for(let i=0;i < args.length;i++){
+                money += args[i];
+            }
+            return money;
+        }else{
+            args.push(...arguments);
+            return res;
+        }
+    }
+    return res;
+})();
+
+console.log(countMoney(1)(2)(3)(4)());
