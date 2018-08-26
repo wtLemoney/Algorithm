@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js实现透明遮罩</title>
+</head>
+<style>
+    #target {
+        width: 200px;
+        height: 300px;
+        margin: 40px;
+        background-color: tomato;
+    }
+</style>
+<body>
+    <div id="target">
+        <div id="mask"></div>
+    </div>
+    <script>
+        function addMask(elem, opacity = 0.2){
+            var rect = elem.getBoundingClientRect();
+            var style = getComputedStyle(elem, null);
+
+            // var mask = document.createElement('div');
+            // mask.setAttribute('id', 'maskId');
+            var mask = document.getElementById('mask');
+            mask.style.position = 'absolute';
+            var marginLeft = parseFloat(style.marginLeft);
+            mask.style.left = (elem.offsetLeft - marginLeft) +'px';
+            var marginTop = parseFloat(style.marginTop);
+            mask.style.top = (elem.offsetTop - marginTop) + 'px';
+
+            mask.style.zIndex = 99;
+            mask.style.opacity = '' + opacity;
+            mask.style.backgroundColor = '#000';
+
+            mask.style.width = (parseFloat(style.marginLeft) + parseFloat(style.marginRight) + rect.width) + 'px';
+            mask.style.height = (parseFloat(style.marginTop) + parseFloat(style.marginBottom) + rect.height) + 'px';
+
+            // elem.parentNode.appendChild(mask);
+            
+        }
+
+
+        var target = document.getElementById('target');
+        var mask = document.getElementById('mask');
+        var flag = 1;
+        
+
+        target.addEventListener('click', function(){
+            if(flag === 1){
+                console.log('click1');
+                flag = 0;
+                addMask(target);
+                mask.style.visibility = 'visible';
+            }else{
+                console.log('click2');
+                flag = 1;
+                mask.style.visibility = 'hidden';
+            }
+        }, false);
+        
+
+    </script>
+</body>
+</html>

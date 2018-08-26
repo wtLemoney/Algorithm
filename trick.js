@@ -29,3 +29,9 @@ console.log(palindrome('taco cat'));
 //计数数组中值的出现次数 // count([1,1,2,1,2,3], 1) -> 3
 const count = (arr, value) => arr.reduce((a, v) => v === value ? a+1 : a+0, 0);
 console.log(count([1,1,2,1,2,3], 1));
+
+
+//Curry // curry(Math.pow)(2)(10) -> 1024
+const curry = (fn, arity = fn.length, ...args) => 
+    arity == args.length ? fn(...args) : curry.bind(null, fn, arity, ...args);
+console.log(curry(Math.pow)(2)(10));
